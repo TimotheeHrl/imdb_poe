@@ -1,10 +1,18 @@
 package entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "users")
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -16,9 +24,10 @@ public class User {
 
     @Column(name = "firstname", length = 100)
     private String firstname;
-
-    @Column(name = "role", length = 100)
-    private String role;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "role", columnDefinition = "varchar(255) default 'Visitors'")
+    private Role role;
 
     @Column(name = "email", length = 100)
     private String email;
@@ -29,7 +38,7 @@ public class User {
     public User() {
     }
 
-    public User(String lastname, String firstname, String role, String email, String password) {
+    public User(String lastname, String firstname, Role role, String email, String password) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.role = role;
@@ -61,11 +70,11 @@ public class User {
         this.firstname = firstname;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
