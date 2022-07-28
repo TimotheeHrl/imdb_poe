@@ -4,7 +4,8 @@
  */
 package com.mycompany.dao;
 
-import com.mycompany.entity.Movie;
+import com.mycompany.entity.Genre;
+import com.mycompany.entity.Role;
 import com.mycompany.helper.SessionHelper;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,23 +16,23 @@ import javax.persistence.Query;
  *
  * @author maxla
  */
-public class movieDao {
+public class RoleDao {
     EntityManager em = SessionHelper.getEntityManager();
     
     
-    public Movie findById(long id){
+    public Role findById(long id){
         
-        Movie movie = em.find(Movie.class, id);
+        Role role = em.find(Role.class, id);
         
-        if(movie==null){
+        if(role==null){
             System.out.println("movie inexistant");
         }
-        return movie;     
+        return role;     
     }
     
-    public void create(Movie movie){
-        if(movie == null){
-            System.out.println("L'objet movie ne peut pas etre null");
+    public void create(Role role){
+        if(role == null){
+            System.out.println("L'objet genre ne peut pas etre null");
             return;
         }
         // On declare notre transaction avec pour valeur par defaut null
@@ -39,7 +40,7 @@ public class movieDao {
         try{
             trans = em.getTransaction();
             trans.begin();
-            em.persist(movie);
+            em.persist(role);
             trans.commit();
         }catch(Exception e){
             System.out.println("Une erreur est survenu lors de la creation");
@@ -50,24 +51,24 @@ public class movieDao {
         }
     }
     
-    public void update(Long id, Movie movie) {
+    public void update(Long id, Role role) {
         
         // On r�cup�re le role qu'on souhaite modifier
-        Movie movieToUpdate = em.find(Movie.class, id);
+        Role roleToUpdate = em.find(Role.class, id);
         // Si le role n'existe pas on ne fait pas d'update
-        if (movieToUpdate == null) {
-            System.out.println("Le film avec l'id:" + id + " n'existe pas");
+        if (roleToUpdate == null) {
+            System.out.println("Le role avec l'id:" + id + " n'existe pas");
             return;
         }
         // on set les donn�es uniquement si elle ne sont pas null
         
-        movieToUpdate.copy(movie);
+        roleToUpdate.copy(genre);
         
         EntityTransaction tx = null;
         try {
             tx = em.getTransaction();
             tx.begin();
-            em.merge(movieToUpdate);           
+            em.merge(roleToUpdate);           
             tx.commit();
         } catch (Exception e) {
             System.out.println("Une erreur est survenu lors de la modification");
@@ -77,8 +78,8 @@ public class movieDao {
         }
     }
     
-    public List<Movie> findAll(){
-        Query query = em.createQuery("SELECT m FROM Movie m"); 
+    public List<Role> findAll(){
+        Query query = em.createQuery("SELECT r FROM Role g"); 
         return query.getResultList();
     }
     
@@ -87,10 +88,10 @@ public class movieDao {
     public void delete(Long id) {
         
         // On r�cup�re le role qu'on souhaite modifier
-        Movie movieToDeletee = em.find(Movie.class, id);
+        Role RoleToDeletee = em.find(Role.class, id);
         // Si le role n'existe pas on ne fait pas d'update
-        if (movieToDeletee == null) {
-            System.out.println("Le movie avec l'id:" + id + " n'existe pas");
+        if (RoleToDeletee == null) {
+            System.out.println("Lobjet Role avec l'id:" + id + " n'existe pas");
             return;
         }
         // on set les donn�es uniquement si elle ne sont pas null
@@ -98,7 +99,7 @@ public class movieDao {
         try {
             tx = em.getTransaction();
             tx.begin();
-            em.remove(movieToDeletee);
+            em.remove(RoleToDeletee);
             tx.commit();
         } catch (Exception e) {
             System.out.println("Une erreur est survenu lors de la modification");
@@ -107,6 +108,5 @@ public class movieDao {
             }
         }
     }
-    
     
 }
