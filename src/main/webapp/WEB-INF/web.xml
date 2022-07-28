@@ -7,6 +7,7 @@
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>com.mycompany;com.mycompany.resources</param-value>
         </init-param>
+
         <init-param>
             <param-name>javax.ws.rs.container.ContainerRequestFilter</param-name>
             <param-value>org.glassfish.jersey.filter.LoggingFilter</param-value>
