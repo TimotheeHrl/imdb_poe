@@ -15,7 +15,7 @@ import javax.persistence.Query;
  *
  * @author maxla
  */
-public class movieDao {
+public class MovieDao {
     EntityManager em = SessionHelper.getEntityManager();
     
     
@@ -106,6 +106,15 @@ public class movieDao {
                 tx.rollback();
             }
         }
+    }
+
+    public List<Movie> search(String query, int count) {
+        EntityManager entityManager = SessionHelper.getEntityManager();
+        Query searchQuery = entityManager.createQuery("select m from Movie m where m.name like :query or m.originCountry like :query");
+        searchQuery.setParameter("query", "%" + query + "%");
+        searchQuery.setMaxResults(count);
+
+        return searchQuery.getResultList();
     }
     
     
