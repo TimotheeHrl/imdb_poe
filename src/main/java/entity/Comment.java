@@ -16,16 +16,16 @@ public class Comment {
     @Column(name = "id_comment")
     private int id;
     
-    @Column(name = "user")
+    @Column(name = "user", length = 100)
     private User user;
     
-    @Column(name = "content")
+    @Column(name = "content", length = 250)
     private String content;
     
-    @Column(name = "movie")
+    @Column(name = "movie", length = 100)
     private Movie movie;
     
-    @Column(name = "creation_date")
+    @Column(name = "creation_date", length = 100)
     private Date creationDate;
 
     public Comment() {
