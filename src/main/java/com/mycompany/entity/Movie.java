@@ -6,6 +6,7 @@ package com.mycompany.entity;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,9 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.UpdateTimestamp;
 
 /**
@@ -26,53 +29,59 @@ import org.hibernate.annotations.UpdateTimestamp;
  * @author maxla
  */
 @Entity
-@Table(name="movie")
+@Table(name = "movies")
+@XmlRootElement(name = "movie")
 public class Movie {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_movie")
-    private int id;
-    
-    @Column(name="name",  length=100)
+    @Column(name = "id_movie")
+    private int idMovie;
+
+    @Column(name = "name", length = 100)
     private String name;
-    
-    @Column(name="date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+
+    @Column(name = "date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @UpdateTimestamp
     private Date date;
-    
-    @Column(name="duration")
-    private int duration;
-    
-    @Column(name="rating")
-    private float rating;
-    @Column(name="synopsis", columnDefinition="TEXT")
+
+    @Column(name = "duration")
+    private Integer duration;
+
+    @Column(name = "rating")
+    private Float rating;
+    @Column(name = "synopsis", columnDefinition = "TEXT")
     private String synopsis;
-    
-    @Column(name="genre")
-    @ManyToMany(fetch = FetchType.LAZY ) 
+
+    @Column(name = "genre")
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "genre",
-                joinColumns = @JoinColumn( name = "id_movie" ),
-                inverseJoinColumns = @JoinColumn( name = "id_genre" ) )
+            joinColumns = @JoinColumn(name = "id_movie"),
+            inverseJoinColumns = @JoinColumn(name = "id_genre"))
     private List<Genre> genre;
+
     
-    @Column(name="actors")
-    @ManyToMany(fetch = FetchType.LAZY ) 
+    @Column(name = "actors")
+    @ManyToMany(fetch = FetchType.LAZY)
 
     @JoinTable(name = "actors_movie",
-                joinColumns = @JoinColumn( name = "id_movie" ),
-                inverseJoinColumns = @JoinColumn( name = "id_actor" ) )
+            joinColumns = @JoinColumn(name = "id_movie"),
+            inverseJoinColumns = @JoinColumn(name = "id_actor"))
     private List<Actor> actors;
-    
-    @Column(name="originCountry")
+
+    @Column(name = "originCountry")
     private String originCountry;
-    
+
     //@CollectionTable a voir
-    @Column(name="languages")
+    @Column(name = "languages")
     private List<String> languages;
-    
-    @Column(name="comments")
+
+    @OneToMany(orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "idComment", fetch = FetchType.LAZY)
+    @Column(name = "comments")
     private List<Comment> comments;
+
+    public Movie() {
+    }
 
     public Movie(String name, Date date, int duration, float rating, String synopsis, List<Genre> genre, List<Actor> actors, String originCountry, List<String> languages, List<Comment> comments) {
         this.name = name;
@@ -87,15 +96,12 @@ public class Movie {
         this.comments = comments;
     }
 
-    public Movie() {
+    public int getIdMovie() {
+        return idMovie;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setIdMovie(int idMovie) {
+        this.idMovie = idMovie;
     }
 
     public String getName() {
@@ -114,19 +120,19 @@ public class Movie {
         this.date = date;
     }
 
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
@@ -178,9 +184,36 @@ public class Movie {
         this.comments = comments;
     }
 
-    
-   
-    
-   
-           
+    public void copy(Movie data) {
+        if (data.getName() != null) {
+            this.name = data.getName();
+        }
+        if (data.getDate() != null) {
+            this.date = data.getDate();
+        }
+        if (data.getDuration() != null) {
+            this.duration = data.getDuration();
+        }
+        if (data.getRating() != null) {
+            this.rating = data.getRating();
+        }
+        if (data.getSynopsis() != null) {
+            this.synopsis = data.getSynopsis();
+        }
+        if (data.getGenre() != null) {
+            this.genre = data.getGenre();
+        }
+        if (data.getActors() != null) {
+            this.actors = data.getActors();
+        }
+        if (data.getOriginCountry() != null) {
+            this.originCountry = data.getOriginCountry();
+        }
+        if (data.getLanguages() != null) {
+            this.languages = data.getLanguages();
+        }
+        if (data.getComments() != null) {
+            this.comments = data.getComments();
+        }
+    }
 }
