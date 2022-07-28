@@ -31,7 +31,9 @@ public class Actor {
     private String birthDate;
 
     @Column
-    private List<Movie> Movies;
+    @ManyToMany
+    @JoinTable(name="movies_actors", joinColumns = @JoinColumn( name = "id_Actors" ), inverseJoinColumns = @JoinColumn( name = "id_Movies" ) )
+    private List<Movie> movies;
 
     public Actor() {
     }
