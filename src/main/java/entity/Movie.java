@@ -137,11 +137,11 @@ public class Movie {
     }
 
 
-    public <any> getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(<any> genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
