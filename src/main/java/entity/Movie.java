@@ -59,7 +59,7 @@ public class Movie {
     @Column(name="actors")
     @ManyToMany(fetch = FetchType.LAZY ) 
 
-    @JoinTable(name = "actor",
+    @JoinTable(name = "actors_movie",
                 joinColumns = @JoinColumn( name = "id_movie" ),
                 inverseJoinColumns = @JoinColumn( name = "id_actor" ) )
     private List<Actor> actors;
@@ -73,9 +73,7 @@ public class Movie {
     @Column(name="comments")
     private List<Comment> comments;
 
-    
-    public Movie(String name, Date date, int duration, float rating, String synopsis, <any> genre, <any> actors, String originCountry, <any> languages, <any> comments) {
-        
+    public Movie(String name, Date date, int duration, float rating, String synopsis, List<Genre> genre, List<Actor> actors, String originCountry, List<String> languages, List<Comment> comments) {
         this.name = name;
         this.date = date;
         this.duration = duration;
@@ -87,7 +85,10 @@ public class Movie {
         this.languages = languages;
         this.comments = comments;
     }
-    
+
+    public Movie() {
+    }
+
     public int getId() {
         return id;
     }
@@ -136,20 +137,19 @@ public class Movie {
         this.synopsis = synopsis;
     }
 
-
-    public Genre getGenre() {
+    public List<Genre> getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(List<Genre> genre) {
         this.genre = genre;
     }
 
-    public <any> getActors() {
+    public List<Actor> getActors() {
         return actors;
     }
 
-    public void setActors(<any> actors) {
+    public void setActors(List<Actor> actors) {
         this.actors = actors;
     }
 
@@ -161,21 +161,25 @@ public class Movie {
         this.originCountry = originCountry;
     }
 
-    public <any> getLanguages() {
+    public List<String> getLanguages() {
         return languages;
     }
 
-    public void setLanguages(<any> languages) {
+    public void setLanguages(List<String> languages) {
         this.languages = languages;
     }
 
-    public <any> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(<any> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
     
+   
+    
+   
            
 }

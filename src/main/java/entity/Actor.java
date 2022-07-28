@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import entity.movie;
+import entity.Movie;
 
 @XmlRootElement(name = "actors")
 @Entity
@@ -30,7 +30,11 @@ public class Actor {
     @Column(length = 100)
     private String birthDate;
 
-    @Column
+    @Column(name="movies")
+    @ManyToMany(fetch = FetchType.LAZY ) 
+    @JoinTable(name = "actors_movie",
+                joinColumns = @JoinColumn( name = "id_actor" ),
+                inverseJoinColumns = @JoinColumn( name = "id_movie" ) )
     private List<Movie> Movies;
 
     public Actor() {
