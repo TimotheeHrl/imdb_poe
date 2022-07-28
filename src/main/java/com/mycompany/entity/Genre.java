@@ -12,22 +12,24 @@ public class Genre {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    private int idGenre;
 
     @Column(name = "name", length = 50)
     private String name;
+
+    public Genre() {
+    }
 
     public Genre(String name) {
         this.name = name;
     }
 
-    public Genre() {
-
+    public int getIdGenre() {
+        return idGenre;
     }
 
-    public int getId() {
-        return id;
+    public void setIdGenre(int idGenre) {
+        this.idGenre = idGenre;
     }
 
     public String getName() {
@@ -38,24 +40,33 @@ public class Genre {
         this.name = name;
     }
 
+   
+    
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Genre)) return false;
         Genre genre = (Genre) o;
-        return getId() == genre.getId();
+        return getIdGenre() == genre.getIdGenre();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getIdGenre());
     }
 
     @Override
     public String toString() {
         return "Genre{" +
-                "id=" + id +
+                "id=" + idGenre +
                 ", name='" + name + '\'' +
                 '}';
+    }
+    
+        public void copy(Genre data) {
+        if (data.getName() != null) {
+            this.name = data.getName();
+        }
     }
 }
