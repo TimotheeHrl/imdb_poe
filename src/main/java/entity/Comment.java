@@ -32,7 +32,7 @@ public class Comment {
         
     }
 
-    public Comment(, User user, String content, Movie movie, Date creationDate) {
+    public Comment(User user, String content, Movie movie, Date creationDate) {
         this.user = user;
         this.content = content;
         this.movie = movie;
