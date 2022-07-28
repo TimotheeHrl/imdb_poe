@@ -30,7 +30,6 @@ public class Actor {
     @Column(length = 100)
     private String birthDate;
 
-    @Column(name = "movies")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "actors_movie",
             joinColumns = @JoinColumn(name = "id_actor"),

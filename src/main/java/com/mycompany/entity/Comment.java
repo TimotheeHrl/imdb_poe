@@ -1,12 +1,14 @@
 package com.mycompany.entity;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,15 +23,14 @@ public class Comment {
     @Column(name = "id_comment")
     private int idComment;
     
-    @Column(name = "user", length = 100)
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     
     @Column(name = "content", length = 250)
     private String content;
     
-    @Column(name = "movie", length = 100)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_movie", nullable = false)
     private Movie movie;
     
     @Column(name = "creation_date", length = 100)

@@ -7,6 +7,7 @@ package com.mycompany.entity;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -63,7 +64,6 @@ public class Movie {
     
     @Column(name = "actors")
     @ManyToMany(fetch = FetchType.LAZY)
-
     @JoinTable(name = "actors_movie",
             joinColumns = @JoinColumn(name = "id_movie"),
             inverseJoinColumns = @JoinColumn(name = "id_actor"))
@@ -72,18 +72,16 @@ public class Movie {
     @Column(name = "originCountry")
     private String originCountry;
 
-    //@CollectionTable a voir
     @Column(name = "languages")
-    private List<String> languages;
+    private String languages;
 
-    @OneToMany(orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "idComment", fetch = FetchType.LAZY)
-    @Column(name = "comments")
+    @OneToMany(orphanRemoval = true, mappedBy = "movie", fetch = FetchType.LAZY)
     private List<Comment> comments;
 
     public Movie() {
     }
 
-    public Movie(String name, Date date, int duration, float rating, String synopsis, List<Genre> genre, List<Actor> actors, String originCountry, List<String> languages, List<Comment> comments) {
+    public Movie(String name, Date date, int duration, float rating, String synopsis, List<Genre> genre, List<Actor> actors, String originCountry, String languages, List<Comment> comments) {
         this.name = name;
         this.date = date;
         this.duration = duration;
@@ -168,11 +166,11 @@ public class Movie {
         this.originCountry = originCountry;
     }
 
-    public List<String> getLanguages() {
+    public String getLanguages() {
         return languages;
     }
 
-    public void setLanguages(List<String> languages) {
+    public void setLanguages(String languages) {
         this.languages = languages;
     }
 
