@@ -37,6 +37,7 @@ public class Actor {
                 inverseJoinColumns = @JoinColumn( name = "id_movie" ) )
     private List<Movie> Movies;
 
+
     public Actor() {
     }
 
