@@ -20,7 +20,7 @@ public class Role {
     @Column(name = "identifiant", length = 100)
     private String identifiant;
 
-    @Column(name = "desciption", length = 100)
+    @Column(name = "description", length = 100)
     private String desciption;
     
     public Role() {

@@ -62,7 +62,7 @@ public class RoleDao {
         }
         // on set les donn�es uniquement si elle ne sont pas null
         
-        roleToUpdate.copy(genre);
+        roleToUpdate.copy(role);
         
         EntityTransaction tx = null;
         try {
@@ -79,7 +79,7 @@ public class RoleDao {
     }
     
     public List<Role> findAll(){
-        Query query = em.createQuery("SELECT r FROM Role g"); 
+        Query query = em.createQuery("SELECT r FROM Role r"); 
         return query.getResultList();
     }
     
