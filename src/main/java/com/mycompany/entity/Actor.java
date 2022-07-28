@@ -1,4 +1,4 @@
-package entity;
+package com.mycompany.entity;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import entity.Movie;
+import com.mycompany.entity.Movie;
 
 @XmlRootElement(name = "actors")
 @Entity

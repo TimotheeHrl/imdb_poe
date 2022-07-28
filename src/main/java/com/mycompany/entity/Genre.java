@@ -1,4 +1,4 @@
-package entity;
+package com.mycompany.entity;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;

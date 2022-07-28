@@ -1,4 +1,4 @@
-package helper;
+package com.mycompany.helper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,7 +10,7 @@ public class SessionHelper {
     
     public static EntityManager getEntityManager() {
         if (entityManager == null) {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("test_jpa");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("bdd_imdb");
             entityManager = emf.createEntityManager();
         }
         return entityManager;
