@@ -26,10 +26,6 @@ public class UserResources {
         
         List res = udao.findAll();
         
-        if ( res == null) {
-            System.out.println("ca va pas");
-        }
-        
         return Response.status(Response.Status.OK).entity(res).build();
     }
     
