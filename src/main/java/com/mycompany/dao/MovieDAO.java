@@ -7,10 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-/**
- *
- * @author maxla
- */
+
 public class MovieDAO {
     EntityManager em = SessionHelper.getEntityManager();
     
