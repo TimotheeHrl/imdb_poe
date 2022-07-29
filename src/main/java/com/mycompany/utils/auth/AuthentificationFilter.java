@@ -1,4 +1,4 @@
-package utils;
+package com.mycompany.utils.auth;
 
 import com.mycompany.dao.UserDao;
 import com.mycompany.entity.User;
@@ -23,6 +23,7 @@ public class AuthentificationFilter implements ContainerRequestFilter {
     HttpServletRequest request;
 
    public int userIdThatIsLoggedIn ;
+
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {

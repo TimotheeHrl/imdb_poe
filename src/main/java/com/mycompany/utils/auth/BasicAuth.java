@@ -1,4 +1,4 @@
-package utils;
+package com.mycompany.utils.auth;
 
 import javax.xml.bind.DatatypeConverter;
 
