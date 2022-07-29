@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -72,8 +73,9 @@ public class Movie {
     @Column(name = "originCountry")
     private String originCountry;
 
-    @Column(name = "languages")
-    private String languages;
+    @ElementCollection
+    @CollectionTable(name = "languages", joinColumns = @JoinColumn(name = "movie_id"))
+    private List<String> languages;
 
     @OneToMany(orphanRemoval = true, mappedBy = "movie", fetch = FetchType.LAZY)
     private List<Comment> comments;
@@ -81,7 +83,7 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String name, Date date, int duration, float rating, String synopsis, List<Genre> genre, List<Actor> actors, String originCountry, String languages, List<Comment> comments) {
+    public Movie(String name, Date date, int duration, float rating, String synopsis, List<Genre> genre, List<Actor> actors, String originCountry, List<String> languages, List<Comment> comments) {
         this.name = name;
         this.date = date;
         this.duration = duration;
@@ -166,11 +168,11 @@ public class Movie {
         this.originCountry = originCountry;
     }
 
-    public String getLanguages() {
+    public List<String> getLanguages() {
         return languages;
     }
 
-    public void setLanguages(String languages) {
+    public void setLanguages(List<String> languages) {
         this.languages = languages;
     }
 

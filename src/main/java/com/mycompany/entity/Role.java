@@ -21,14 +21,14 @@ public class Role {
     private String identifiant;
 
     @Column(name = "description", length = 100)
-    private String desciption;
+    private String description;
     
     public Role() {
     }
     
     public Role(String identifiant, String desciption) {
         this.identifiant = identifiant;
-        this.desciption = desciption;
+        this.description = desciption;
     }
 
     public int getId() {
@@ -47,20 +47,20 @@ public class Role {
         this.identifiant = identifiant;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setDescription(String desciption) {
+        this.description = desciption;
     }
     
     public void copy(Role data) {
         if (data.getIdentifiant() != null) {
             this.identifiant = data.getIdentifiant();
         }
-        if (data.getDesciption() != null) {
-            this.desciption = data.getDesciption();
+        if (data.getDescription() != null) {
+            this.description = data.getDescription();
         }
     }
 }
