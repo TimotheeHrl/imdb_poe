@@ -51,29 +51,17 @@ public class Movie {
 
     @Column(name = "rating")
     private Float rating;
-    
+
     @Column(name = "synopsis", columnDefinition = "TEXT")
     private String synopsis;
 
-<<<<<<< HEAD
-    
-=======
->>>>>>> 65f5b56c3e2b384000be822e404243e3b9274a1c
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "genre",
+    @JoinTable(name = "genre_movie",
             joinColumns = @JoinColumn(name = "id_movie"),
             inverseJoinColumns = @JoinColumn(name = "id_genre"))
     private List<Genre> genre;
 
-<<<<<<< HEAD
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy="movies")
-=======
-    
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "actors_movie",
-            joinColumns = @JoinColumn(name = "id_movie"),
-            inverseJoinColumns = @JoinColumn(name = "id_actor"))
->>>>>>> 65f5b56c3e2b384000be822e404243e3b9274a1c
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "movies")
     private List<Actor> actors;
 
     @Column(name = "originCountry")
