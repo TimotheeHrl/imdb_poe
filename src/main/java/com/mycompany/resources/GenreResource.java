@@ -46,7 +46,7 @@ public class GenreResource {
     @PUT
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 
-    public Response updateUser(@PathParam("id") long id,Genre genreData, @Context HttpServletRequest request) {
+    public Response updateUser(@PathParam("id") int id,Genre genreData, @Context HttpServletRequest request) {
         GenreDao genreDao = new GenreDao();
         Genre genre = genreDao.update(id, genreData);
         return Response.status(Response.Status.OK).entity(genre).build();

@@ -52,7 +52,7 @@ public class GenreDao {
         }
     }
     
-    public Genre update(long id, Genre genre) {
+    public Genre update(int id, Genre genre) {
         
         // On r�cup�re le role qu'on souhaite modifier
         Genre genreToUpdate = em.find(Genre.class, id);
@@ -87,7 +87,7 @@ public class GenreDao {
     
     
     
-    public void delete(Long id) {
+    public void delete(int id) {
         
         // On r�cup�re le role qu'on souhaite modifier
         Genre GenreToDeletee = em.find(Genre.class, id);
