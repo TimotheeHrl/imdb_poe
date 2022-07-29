@@ -23,7 +23,6 @@ public class GenreResource {
     public Response getPerson(@Context HttpServletRequest request) throws ServletException, IOException {
 
         List<Genre> genres = genreDao.findAll();
-        // entityManager.close();
         if (genres != null) {
             return Response.status(Response.Status.OK).entity(genres.toString()).build();
 
@@ -44,20 +43,16 @@ public class GenreResource {
 
     @Path("/{id}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-
     @PUT
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-
     public Response updateUser(@PathParam("id") int id, Genre genreData, @Context HttpServletRequest request) {
         Genre genre = genreDao.update(id, genreData);
         return Response.status(Response.Status.OK).entity(genre).build();
-
     }
 
     @Path("/{id}")
     @DELETE()
     public Response deleteGenre(@PathParam("id") int id) {
-
         try {
             genreDao.delete(id);
         } catch (NotFoundException e) {
@@ -81,7 +76,6 @@ public class GenreResource {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response putPersonne(@PathParam("id") int id, Genre genre) {
-
         try {
             genreDao.update(id, genre);
         } catch (NotFoundException e) {

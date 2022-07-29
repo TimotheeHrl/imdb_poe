@@ -27,7 +27,7 @@ public class User {
     private String firstname;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role", columnDefinition = "varchar(255) default 'Visitors'")
+    @JoinColumn(name = "roleId")
     private Role role;
 
     @Column(name = "email", length = 100)
@@ -39,7 +39,24 @@ public class User {
     public User() {
     }
 
+    public User(int id, String lastname, String firstname, Role role, String email, String password) {
+        this.idUser = id;
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+    }
+
     public User(String lastname, String firstname, Role role, String email, String password) {
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+    }
+    
+    public User(String lastname, String firstname, String email, String password) {
         this.lastname = lastname;
         this.firstname = firstname;
         this.role = role;

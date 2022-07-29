@@ -10,7 +10,7 @@
 
         <init-param>
             <param-name>javax.ws.rs.container.ContainerRequestFilter</param-name>
-            <param-value>org.glassfish.jersey.filter.LoggingFilter</param-value>
+            <param-value>org.glassfish.jersey.filter.LoggingFilter;com.mycompany.auth.AuthentificationFilter</param-value>
         </init-param>
         <init-param>
             <param-name>jersey.config.server.provider.scanning.recursive</param-name>
