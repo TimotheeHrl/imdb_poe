@@ -55,7 +55,7 @@ public class UserResources {
     @PUT()
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response putPersonne(@PathParam("id") long id, User utilisateur) {
+    public Response putPersonne(@PathParam("id") int id, User utilisateur) {
 
         try {
             udao.update(id, utilisateur);
