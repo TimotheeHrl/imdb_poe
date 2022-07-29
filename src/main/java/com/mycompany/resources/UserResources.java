@@ -21,48 +21,45 @@ import javax.ws.rs.core.Response;
 
 @Path("/user")
 public class UserResources {
-    
+
     UserDao udao = new UserDao();
-    
+
     @GET()
-    @Produces({ MediaType.APPLICATION_JSON })
+    @Produces({MediaType.APPLICATION_JSON})
     public Response getAllPersonnes(@Context HttpServletRequest request) {
         List res = udao.findAll();
-<<<<<<< HEAD
-        if ( res == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity(res).build();        
-        } 
-=======
-        
->>>>>>> 65f5b56c3e2b384000be822e404243e3b9274a1c
+        if (res == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity(res).build();
+        }
+
         return Response.status(Response.Status.OK).entity(res).build();
     }
-    
+
     @POST
-    @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response postPersonne(User u, @Context HttpServletRequest request) {
-        
+
         udao.create(u);
-               
+
         try {
             udao.create(u);
-        } catch (Exception e){
-        throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).entity("An error occured").build());   
+        } catch (Exception e) {
+            throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).entity("An error occured").build());
         }
         return Response.status(Response.Status.CREATED)
                 .entity("User successfully created")
                 .build();
     }
-    
+
     @Path("/id-{id}")
     @PUT()
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response putPersonne(@PathParam("id") long id, User utilisateur) {
-        
-        try{
+
+        try {
             udao.update(id, utilisateur);
-        } catch (NotFoundException e){
+        } catch (NotFoundException e) {
             throw new WebApplicationException(
                     Response.status(Response.Status.NOT_FOUND)
                             .entity("User was not found")
@@ -98,7 +95,7 @@ public class UserResources {
         }
         return Response.status(Response.Status.OK).entity("User successfully deleted").build();
     }
-    
+
     @Path("/{id}")
     @GET()
     @Produces({MediaType.APPLICATION_JSON})
@@ -112,6 +109,5 @@ public class UserResources {
 
         return user;
     }
-    
 
 }
