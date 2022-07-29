@@ -55,7 +55,6 @@ public class MovieResources {
                             .build()
             );
         }
-
         return Response.status(Response.Status.CREATED).entity(newMovie).build();
     }
 
