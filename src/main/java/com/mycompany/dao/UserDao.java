@@ -71,8 +71,10 @@ public class UserDao {
     }
     
     public List<User> findAll(){
-        Query query = em.createQuery("SELECT u FROM User u"); 
-        return query.getResultList();
+        EntityManager entityManager = SessionHelper.getEntityManager();
+        Query query = entityManager.createQuery("SELECT u from User u");
+        List<User> allUser = query.getResultList();
+        return allUser;
     }
     
     

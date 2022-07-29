@@ -35,7 +35,7 @@ public class Comment {
     
     @Column(name = "creation_date", length = 100)
     private String creationDate;
-
+//teeest
     public Comment() {
         
     }
