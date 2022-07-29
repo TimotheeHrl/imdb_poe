@@ -43,7 +43,7 @@ public class UserDao {
         }
     }
     
-    public void update(int id, User user) {
+    public void update(Long id, User user) {
         
         // On r�cup�re le role qu'on souhaite modifier
         User userToUpdate = em.find(User.class, id);

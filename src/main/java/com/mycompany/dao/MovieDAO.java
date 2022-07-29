@@ -7,11 +7,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+/**
+ *
+ * @author maxla
+ */
 public class MovieDAO {
     EntityManager em = SessionHelper.getEntityManager();
     
     
-    public Movie findById(int id){
+    public Movie findById(long id){
         
         Movie movie = em.find(Movie.class, id);
         

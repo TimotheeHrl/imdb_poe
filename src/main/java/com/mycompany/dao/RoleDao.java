@@ -4,7 +4,6 @@
  */
 package com.mycompany.dao;
 
-import com.mycompany.entity.Genre;
 import com.mycompany.entity.Role;
 import com.mycompany.helper.SessionHelper;
 import java.util.List;

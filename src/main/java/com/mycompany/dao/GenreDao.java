@@ -18,18 +18,16 @@ import javax.persistence.Query;
 public class GenreDao {
     EntityManager em = SessionHelper.getEntityManager();
     
-
-       /*
-
-    public Genre findMovieByGenreName(String name){
+    
+    public Genre findById(long id){
         
-        Genre genre = em.find(Genre.class, name);
+        Genre genre = em.find(Genre.class, id);
         
         if(genre==null){
             System.out.println("movie inexistant");
         }
         return genre;     
-    } */
+    }
     
     public void create(Genre genre){
         if(genre == null){
@@ -87,7 +85,7 @@ public class GenreDao {
     
     
     
-    public void delete(int id) {
+    public void delete(Long id) {
         
         // On r�cup�re le role qu'on souhaite modifier
         Genre GenreToDeletee = em.find(Genre.class, id);
