@@ -34,16 +34,16 @@ public class Actor {
     @JoinTable(name = "actors_movie",
             joinColumns = @JoinColumn(name = "id_actor"),
             inverseJoinColumns = @JoinColumn(name = "id_movie"))
-    private List<Movie> Movies;
+    private List<Movie> movies;
 
     public Actor() {
     }
 
-    public Actor(String firstname, String lastname, String birthDate, List<Movie> Movies) {
+    public Actor(String firstname, String lastname, String birthDate, List<Movie> movies) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthDate = birthDate;
-        this.Movies = Movies;
+        this.movies = movies;
     }
 
     public int getIdActor() {
@@ -79,12 +79,13 @@ public class Actor {
     }
 
     public List<Movie> getMovies() {
-        return Movies;
+        return movies;
     }
 
-    public void setMovies(List<Movie> Movies) {
-        this.Movies = Movies;
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
+
 
    public void copy(Actor data) {
         if (data.getFirstname() != null) {
@@ -97,7 +98,7 @@ public class Actor {
            this.birthDate = data.getBirthDate();
         }
         if (data.getMovies() != null) {
-           this.Movies = data.getMovies();
+           this.movies = data.getMovies();
         }
     }
 }

@@ -62,12 +62,7 @@ public class Movie {
             inverseJoinColumns = @JoinColumn(name = "id_genre"))
     private List<Genre> genre;
 
-    
-    
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "actors_movie",
-            joinColumns = @JoinColumn(name = "id_movie"),
-            inverseJoinColumns = @JoinColumn(name = "id_actor"))
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy="movies")
     private List<Actor> actors;
 
     @Column(name = "originCountry")
