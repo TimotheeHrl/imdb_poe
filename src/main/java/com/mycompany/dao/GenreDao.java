@@ -1,30 +1,38 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.mycompany.dao;
 
-
-import com.mycompany.entity.User;
+import com.mycompany.entity.Actor;
+import com.mycompany.entity.Genre;
 import com.mycompany.helper.SessionHelper;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-
-public class UserDao {
+/**
+ *
+ * @author maxla
+ */
+public class GenreDao {
     EntityManager em = SessionHelper.getEntityManager();
-
-    public User findById(long id){
+    
+    
+    public Genre findById(long id){
         
-        User user = em.find(User.class, id);
+        Genre genre = em.find(Genre.class, id);
         
-        if(user==null){
+        if(genre==null){
             System.out.println("movie inexistant");
         }
-        return user;     
+        return genre;     
     }
     
-    public void create(User user){
-        if(user == null){
-            System.out.println("L'objet user ne peut pas etre null");
+    public void create(Genre genre){
+        if(genre == null){
+            System.out.println("L'objet genre ne peut pas etre null");
             return;
         }
         // On declare notre transaction avec pour valeur par defaut null
@@ -32,7 +40,7 @@ public class UserDao {
         try{
             trans = em.getTransaction();
             trans.begin();
-            em.persist(user);
+            em.persist(genre);
             trans.commit();
         }catch(Exception e){
             System.out.println("Une erreur est survenu lors de la creation");
@@ -43,24 +51,24 @@ public class UserDao {
         }
     }
     
-    public void update(Long id, User user) {
+    public void update(Long id, Genre genre) {
         
         // On r�cup�re le role qu'on souhaite modifier
-        User userToUpdate = em.find(User.class, id);
+        Genre genreToUpdate = em.find(Genre.class, id);
         // Si le role n'existe pas on ne fait pas d'update
-        if (userToUpdate == null) {
-            System.out.println("Le film avec l'id:" + id + " n'existe pas");
+        if (genreToUpdate == null) {
+            System.out.println("Le genre avec l'id:" + id + " n'existe pas");
             return;
         }
         // on set les donn�es uniquement si elle ne sont pas null
         
-        userToUpdate.copy(user);
+        genreToUpdate.copy(genre);
         
         EntityTransaction tx = null;
         try {
             tx = em.getTransaction();
             tx.begin();
-            em.merge(userToUpdate);           
+            em.merge(genreToUpdate);           
             tx.commit();
         } catch (Exception e) {
             System.out.println("Une erreur est survenu lors de la modification");
@@ -70,20 +78,20 @@ public class UserDao {
         }
     }
     
-    public List<User> findAll(){
-        Query query = em.createQuery("SELECT u FROM User u"); 
+    public List<Genre> findAll(){
+        Query query = em.createQuery("SELECT g FROM Genre g"); 
         return query.getResultList();
     }
     
     
     
-    public void delete(int id) {
+    public void delete(Long id) {
         
         // On r�cup�re le role qu'on souhaite modifier
-        User userToDeletee = em.find(User.class, id);
+        Genre GenreToDeletee = em.find(Genre.class, id);
         // Si le role n'existe pas on ne fait pas d'update
-        if (userToDeletee == null) {
-            System.out.println("Le movie avec l'id:" + id + " n'existe pas");
+        if (GenreToDeletee == null) {
+            System.out.println("Lobjet Genre avec l'id:" + id + " n'existe pas");
             return;
         }
         // on set les donn�es uniquement si elle ne sont pas null
@@ -91,7 +99,7 @@ public class UserDao {
         try {
             tx = em.getTransaction();
             tx.begin();
-            em.remove(userToDeletee);
+            em.remove(GenreToDeletee);
             tx.commit();
         } catch (Exception e) {
             System.out.println("Une erreur est survenu lors de la modification");
@@ -100,5 +108,4 @@ public class UserDao {
             }
         }
     }
-    
 }

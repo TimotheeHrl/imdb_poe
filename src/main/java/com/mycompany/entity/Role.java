@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "roles")
+@XmlRootElement(name = "role")
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -20,12 +20,12 @@ public class Role {
     @Column(name = "identifiant", length = 100)
     private String identifiant;
 
-    @Column(name = "desciption", length = 100)
+    @Column(name = "description", length = 100)
     private String desciption;
-
+    
     public Role() {
     }
-
+    
     public Role(String identifiant, String desciption) {
         this.identifiant = identifiant;
         this.desciption = desciption;
@@ -54,5 +54,13 @@ public class Role {
     public void setDesciption(String desciption) {
         this.desciption = desciption;
     }
-
+    
+    public void copy(Role data) {
+        if (data.getIdentifiant() != null) {
+            this.identifiant = data.getIdentifiant();
+        }
+        if (data.getDesciption() != null) {
+            this.desciption = data.getDesciption();
+        }
+    }
 }

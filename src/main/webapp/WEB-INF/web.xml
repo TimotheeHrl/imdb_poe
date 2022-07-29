@@ -5,7 +5,7 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>entity</param-value>
+            <param-value>com.mycompany;com.mycompany.resources</param-value>
         </init-param>
         <init-param>
             <param-name>javax.ws.rs.container.ContainerRequestFilter</param-name>

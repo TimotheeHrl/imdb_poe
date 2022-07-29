@@ -6,18 +6,19 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "users")
+@XmlRootElement(name = "user")
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idUser;
 
     @Column(name = "lastname", length = 100)
     private String lastname;
@@ -26,7 +27,7 @@ public class User {
     private String firstname;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "role", columnDefinition = "varchar(255) default 'Visitors'")
+    @JoinColumn(name = "role", columnDefinition = "varchar(255) default 'Visitors'")
     private Role role;
 
     @Column(name = "email", length = 100)
@@ -46,12 +47,12 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
-        return id;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public String getLastname() {
@@ -94,4 +95,18 @@ public class User {
         this.password = password;
     }
 
+    public void copy(User data) {
+        if (data.getLastname() != null) {
+            this.lastname = data.getLastname();
+        }
+        if (data.getFirstname() != null) {
+            this.firstname = data.getFirstname();
+        }
+        if (data.getEmail() != null) {
+            this.email = data.getEmail();
+        }
+        if (data.getPassword() != null) {
+            this.password = data.getPassword();
+        }
+    }
 }

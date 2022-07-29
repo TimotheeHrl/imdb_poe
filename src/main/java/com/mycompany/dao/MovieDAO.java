@@ -1,30 +1,33 @@
 package com.mycompany.dao;
 
-
-import com.mycompany.entity.User;
+import com.mycompany.entity.Movie;
 import com.mycompany.helper.SessionHelper;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-
-public class UserDao {
+/**
+ *
+ * @author maxla
+ */
+public class MovieDAO {
     EntityManager em = SessionHelper.getEntityManager();
-
-    public User findById(long id){
+    
+    
+    public Movie findById(long id){
         
-        User user = em.find(User.class, id);
+        Movie movie = em.find(Movie.class, id);
         
-        if(user==null){
+        if(movie==null){
             System.out.println("movie inexistant");
         }
-        return user;     
+        return movie;     
     }
     
-    public void create(User user){
-        if(user == null){
-            System.out.println("L'objet user ne peut pas etre null");
+    public void create(Movie movie){
+        if(movie == null){
+            System.out.println("L'objet movie ne peut pas etre null");
             return;
         }
         // On declare notre transaction avec pour valeur par defaut null
@@ -32,7 +35,7 @@ public class UserDao {
         try{
             trans = em.getTransaction();
             trans.begin();
-            em.persist(user);
+            em.persist(movie);
             trans.commit();
         }catch(Exception e){
             System.out.println("Une erreur est survenu lors de la creation");
@@ -43,24 +46,24 @@ public class UserDao {
         }
     }
     
-    public void update(Long id, User user) {
+    public void update(Long id, Movie movie) {
         
         // On r�cup�re le role qu'on souhaite modifier
-        User userToUpdate = em.find(User.class, id);
+        Movie movieToUpdate = em.find(Movie.class, id);
         // Si le role n'existe pas on ne fait pas d'update
-        if (userToUpdate == null) {
+        if (movieToUpdate == null) {
             System.out.println("Le film avec l'id:" + id + " n'existe pas");
             return;
         }
         // on set les donn�es uniquement si elle ne sont pas null
         
-        userToUpdate.copy(user);
+        movieToUpdate.copy(movie);
         
         EntityTransaction tx = null;
         try {
             tx = em.getTransaction();
             tx.begin();
-            em.merge(userToUpdate);           
+            em.merge(movieToUpdate);           
             tx.commit();
         } catch (Exception e) {
             System.out.println("Une erreur est survenu lors de la modification");
@@ -70,19 +73,19 @@ public class UserDao {
         }
     }
     
-    public List<User> findAll(){
-        Query query = em.createQuery("SELECT u FROM User u"); 
+    public List<Movie> findAll(){
+        Query query = em.createQuery("SELECT m FROM Movie m"); 
         return query.getResultList();
     }
     
     
     
-    public void delete(int id) {
+    public void delete(Long id) {
         
         // On r�cup�re le role qu'on souhaite modifier
-        User userToDeletee = em.find(User.class, id);
+        Movie movieToDeletee = em.find(Movie.class, id);
         // Si le role n'existe pas on ne fait pas d'update
-        if (userToDeletee == null) {
+        if (movieToDeletee == null) {
             System.out.println("Le movie avec l'id:" + id + " n'existe pas");
             return;
         }
@@ -91,7 +94,7 @@ public class UserDao {
         try {
             tx = em.getTransaction();
             tx.begin();
-            em.remove(userToDeletee);
+            em.remove(movieToDeletee);
             tx.commit();
         } catch (Exception e) {
             System.out.println("Une erreur est survenu lors de la modification");
@@ -100,5 +103,15 @@ public class UserDao {
             }
         }
     }
+
+    public List<Movie> search(String query, int count) {
+        EntityManager entityManager = SessionHelper.getEntityManager();
+        Query searchQuery = entityManager.createQuery("select m from Movie m where m.name like :query or m.originCountry like :query");
+        searchQuery.setParameter("query", "%" + query + "%");
+        searchQuery.setMaxResults(count);
+
+        return searchQuery.getResultList();
+    }
+    
     
 }
