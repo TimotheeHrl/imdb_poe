@@ -1,4 +1,3 @@
-
 package com.mycompany.resources;
 
 import com.mycompany.dao.MovieDAO;
@@ -13,13 +12,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("movie")
 public class MovieResources {
-    
+
     @GET
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
@@ -31,7 +31,7 @@ public class MovieResources {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Movie getMovie(@PathParam("id") long id) {
+    public Movie getMovie(@PathParam("id") int id) {
         MovieDAO mdao = new MovieDAO();
         Movie movie = mdao.findById(id);
 
@@ -62,7 +62,7 @@ public class MovieResources {
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response updateMovie(Movie movie, @PathParam("id") long id) {
+    public Response updateMovie(Movie movie, @PathParam("id") int id) {
         MovieDAO mdao = new MovieDAO();
 
         try {
@@ -84,7 +84,7 @@ public class MovieResources {
 
     @DELETE
     @Path("{id}")
-    public Response deleteMovie(@PathParam("id") long id) {
+    public Response deleteMovie(@PathParam("id") int id) {
         MovieDAO udao = new MovieDAO();
         try {
             udao.delete(id);
@@ -101,5 +101,36 @@ public class MovieResources {
                             .build());
         }
         return Response.status(Response.Status.OK).entity("The movie is removed.").build();
+    }
+
+    @Path("/search")
+    @GET()
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Movie> searchUser(@QueryParam("q") String query, @QueryParam("count") Integer count) {
+
+        if (query == null) {
+            throw new WebApplicationException(
+                    Response.status(Response.Status.BAD_REQUEST)
+                            .entity("Parameter 'q' is mandatory")
+                            .build()
+            );
+        }
+
+        if (count == null) {
+            count = 1;
+        }
+
+        MovieDAO mdao = new MovieDAO();
+        List<Movie> searchResult = mdao.search(query, count);
+
+        if (searchResult == null || searchResult.isEmpty()) {
+            throw new WebApplicationException(
+                    Response.status(Response.Status.NOT_FOUND)
+                            .entity("No movie found")
+                            .build()
+            );
+        }
+
+        return searchResult;
     }
 }
