@@ -51,10 +51,11 @@ public class Movie {
 
     @Column(name = "rating")
     private Float rating;
+    
     @Column(name = "synopsis", columnDefinition = "TEXT")
     private String synopsis;
 
-    @Column(name = "genre")
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "genre",
             joinColumns = @JoinColumn(name = "id_movie"),
@@ -62,7 +63,7 @@ public class Movie {
     private List<Genre> genre;
 
     
-    @Column(name = "actors")
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "actors_movie",
             joinColumns = @JoinColumn(name = "id_movie"),
