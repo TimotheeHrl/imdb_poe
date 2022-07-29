@@ -7,15 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-/**
- *
- * @author maxla
- */
 public class MovieDAO {
     EntityManager em = SessionHelper.getEntityManager();
     
     
-    public Movie findById(long id){
+    public Movie findById(int id){
         
         Movie movie = em.find(Movie.class, id);
         
@@ -46,7 +42,7 @@ public class MovieDAO {
         }
     }
     
-    public void update(Long id, Movie movie) {
+    public void update(int id, Movie movie) {
         
         // On r�cup�re le role qu'on souhaite modifier
         Movie movieToUpdate = em.find(Movie.class, id);
@@ -80,7 +76,7 @@ public class MovieDAO {
     
     
     
-    public void delete(Long id) {
+    public void delete(int id) {
         
         // On r�cup�re le role qu'on souhaite modifier
         Movie movieToDeletee = em.find(Movie.class, id);
