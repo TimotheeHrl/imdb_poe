@@ -117,7 +117,7 @@ public class RoleResources {
     @Path("/{id}")
     @GET()
     @Produces({MediaType.APPLICATION_JSON})
-    public Role getRole(@PathParam("id") long id, @Context HttpServletRequest request) {
+    public Role getRole(@PathParam("id") int id, @Context HttpServletRequest request) {
 
         Role r = rdao.findById(id);
 
