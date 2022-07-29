@@ -4,7 +4,6 @@
  */
 package com.mycompany.dao;
 
-import com.mycompany.entity.Actor;
 import com.mycompany.entity.Genre;
 import com.mycompany.helper.SessionHelper;
 import java.util.List;
@@ -19,16 +18,18 @@ import javax.persistence.Query;
 public class GenreDao {
     EntityManager em = SessionHelper.getEntityManager();
     
-    
-    public Genre findById(long id){
+
+       /*
+
+    public Genre findMovieByGenreName(String name){
         
-        Genre genre = em.find(Genre.class, id);
+        Genre genre = em.find(Genre.class, name);
         
         if(genre==null){
             System.out.println("movie inexistant");
         }
         return genre;     
-    }
+    } */
     
     public void create(Genre genre){
         if(genre == null){
@@ -51,14 +52,14 @@ public class GenreDao {
         }
     }
     
-    public void update(Long id, Genre genre) {
+    public Genre update(int id, Genre genre) {
         
         // On r�cup�re le role qu'on souhaite modifier
         Genre genreToUpdate = em.find(Genre.class, id);
         // Si le role n'existe pas on ne fait pas d'update
         if (genreToUpdate == null) {
             System.out.println("Le genre avec l'id:" + id + " n'existe pas");
-            return;
+            return genreToUpdate;
         }
         // on set les donn�es uniquement si elle ne sont pas null
         
@@ -76,6 +77,7 @@ public class GenreDao {
                 tx.rollback();
             }
         }
+        return genreToUpdate;
     }
     
     public List<Genre> findAll(){
@@ -85,7 +87,7 @@ public class GenreDao {
     
     
     
-    public void delete(Long id) {
+    public void delete(int id) {
         
         // On r�cup�re le role qu'on souhaite modifier
         Genre GenreToDeletee = em.find(Genre.class, id);
