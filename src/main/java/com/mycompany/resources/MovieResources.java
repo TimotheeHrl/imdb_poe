@@ -103,7 +103,4 @@ public class MovieResources {
         }
         return Response.status(Response.Status.OK).entity("The movie is removed.").build();
     }
-    
-    
-    
 }
