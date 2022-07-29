@@ -1,6 +1,5 @@
 package com.mycompany.resources;
 
-
 import com.mycompany.dao.MovieDAO;
 import com.mycompany.entity.Movie;
 import java.util.List;
