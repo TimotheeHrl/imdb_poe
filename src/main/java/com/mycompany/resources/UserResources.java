@@ -28,9 +28,13 @@ public class UserResources {
     @Produces({ MediaType.APPLICATION_JSON })
     public Response getAllPersonnes(@Context HttpServletRequest request) {
         List res = udao.findAll();
+<<<<<<< HEAD
         if ( res == null) {
             return Response.status(Response.Status.NOT_FOUND).entity(res).build();        
         } 
+=======
+        
+>>>>>>> 65f5b56c3e2b384000be822e404243e3b9274a1c
         return Response.status(Response.Status.OK).entity(res).build();
     }
     

@@ -51,7 +51,7 @@ public class RoleDao {
         }
     }
     
-    public void update(Long id, Role role) {
+    public void update(int id, Role role) {
         
         // On r�cup�re le role qu'on souhaite modifier
         Role roleToUpdate = em.find(Role.class, id);
@@ -85,7 +85,7 @@ public class RoleDao {
     
     
     
-    public void delete(Long id) {
+    public void delete(int id) {
         
         // On r�cup�re le role qu'on souhaite modifier
         Role RoleToDeletee = em.find(Role.class, id);
