@@ -2,11 +2,7 @@ package com.mycompany.resources;
 
 import com.mycompany.dao.GenreDao;
 import com.mycompany.entity.Genre;
-import com.mycompany.entity.Movie;
-import com.mycompany.helper.SessionHelper;
-import com.sun.tools.javac.jvm.Gen;
 
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
