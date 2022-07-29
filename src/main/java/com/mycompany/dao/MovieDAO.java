@@ -35,7 +35,7 @@ public class MovieDAO {
         try{
             trans = em.getTransaction();
             trans.begin();
-            em.persist(movie);
+            em.merge(movie);
             trans.commit();
         }catch(Exception e){
             System.out.println("Une erreur est survenu lors de la creation");

@@ -32,7 +32,7 @@ public class UserDao {
         try{
             trans = em.getTransaction();
             trans.begin();
-            em.persist(user);
+            em.merge(user);
             trans.commit();
         }catch(Exception e){
             System.out.println("Une erreur est survenu lors de la creation");

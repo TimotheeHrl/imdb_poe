@@ -36,10 +36,22 @@ public class UserResources {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     public Response postPersonne(User u, @Context HttpServletRequest request) {
+<<<<<<< HEAD
         
         udao.create(u);
         
         return Response.status(Response.Status.CREATED).entity("utilisateur crée").build();
+=======
+
+        try {
+            udao.create(u);
+        } catch (Exception e) {
+            throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).entity("An error occured").build());
+        }
+        return Response.status(Response.Status.CREATED)
+                .entity("User successfully created")
+                .build();
+>>>>>>> 4951ea0 (all)
     }
     
     @Path("id-{id}")
@@ -50,10 +62,33 @@ public class UserResources {
         
         return Response.status(Response.Status.OK).entity("utilisateur supprimé").build();
     }
+<<<<<<< HEAD
     
     @Path("accueil")
     @GET
     public String accueil() {
         return "accueil";
+=======
+
+    @Path("/{id}")
+    @DELETE()
+    public Response deletePersonne(@PathParam("id") int userId) {
+        try {
+            udao.delete(userId);
+        } catch (NotFoundException e) {
+            throw new WebApplicationException(
+                    Response.status(Response.Status.NOT_FOUND)
+                            .entity("User was not found")
+                            .build()
+            );
+        } catch (Exception e) {
+            throw new WebApplicationException(
+                    Response.status(Response.Status.BAD_REQUEST)
+                            .entity("An error occured")
+                            .build()
+            );
+        }
+        return Response.status(Response.Status.OK).entity("User successfully deleted").build();
+>>>>>>> 4951ea0 (all)
     }
 }

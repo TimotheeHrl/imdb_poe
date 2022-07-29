@@ -67,7 +67,7 @@ public class RoleResources {
     public Response putRole(@PathParam("id") int id, Role r) {
         
         System.out.println(id);
-        System.out.println(r.getDesciption());
+        System.out.println(r.getDescription());
         System.out.println(r.getIdentifiant());
         
         try {
