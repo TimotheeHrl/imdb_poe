@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -36,13 +38,6 @@ public class UserResources {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     public Response postPersonne(User u, @Context HttpServletRequest request) {
-<<<<<<< HEAD
-        
-        udao.create(u);
-        
-        return Response.status(Response.Status.CREATED).entity("utilisateur crée").build();
-=======
-
         try {
             udao.create(u);
         } catch (Exception e) {
@@ -51,7 +46,6 @@ public class UserResources {
         return Response.status(Response.Status.CREATED)
                 .entity("User successfully created")
                 .build();
->>>>>>> 4951ea0 (all)
     }
     
     @Path("id-{id}")
@@ -62,13 +56,6 @@ public class UserResources {
         
         return Response.status(Response.Status.OK).entity("utilisateur supprimé").build();
     }
-<<<<<<< HEAD
-    
-    @Path("accueil")
-    @GET
-    public String accueil() {
-        return "accueil";
-=======
 
     @Path("/{id}")
     @DELETE()
@@ -89,6 +76,5 @@ public class UserResources {
             );
         }
         return Response.status(Response.Status.OK).entity("User successfully deleted").build();
->>>>>>> 4951ea0 (all)
     }
 }

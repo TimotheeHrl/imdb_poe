@@ -85,7 +85,7 @@ public class GenreDao {
     
     
     
-    public void delete(Long id) {
+    public void delete(int id) {
         
         // On r�cup�re le role qu'on souhaite modifier
         Genre GenreToDeletee = em.find(Genre.class, id);
